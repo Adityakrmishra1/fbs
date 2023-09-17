@@ -14,7 +14,6 @@ app.use('/api/v1', routes);
 
 // connection to db.
 
-const uri = "mongodb+srv://nopeace:tAddkl35zSi3QmcI@cluster1.cjrcv2x.mongodb.net/?retryWrites=true&w=majority";
 
 let connectToDb = function () {
 	mongoose.connect(uri, {

@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-
 let UserSchema = new Schema({
 	code: {
 		type: String,
@@ -21,5 +20,4 @@ let UserSchema = new Schema({
 	created_date: Date
 
 });
-
-module.exports = mongoose.model('UserSchema', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

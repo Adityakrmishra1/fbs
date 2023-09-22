@@ -1,28 +1,26 @@
-const User = require('../models/User');
+
+const apiService = require('../api/api.service');
 
 let register = async function (req, res, next) {
 	try {
-		// console.log(req);
-		const { code, first_name, password } = req?.body;
-		// Create a new User document
-		const newUser = new User({
-			code,
-			first_name,
-			password,
-			created_date: new Date()
-		});
-
-		// Save the user to the database
-		const savedUser = await newUser.save();
-
-		return res.status(201).json({
-			message: "done"
-		}); // Respond with the saved user
+		let result = await apiService.handleRegistrationData(req);
+		return res.status(200).json(result);
 	} catch (error) {
-		next(error); // Handle any errors that occur during the registration process
+		console.log('error ' + error);
+		return res.status(400).json(error);
+	}
+}
+let login = async function (req, res, next) {
+	try {
+		let result = await apiService.handleLongin(req);
+		return res.status(200).json(result);
+	} catch (error) {
+		console.log('error ' + error);
+		return res.status(400).json(error);
 	}
 }
 
 module.exports = {
-	register: register
+	register: register,
+	login: login,
 };

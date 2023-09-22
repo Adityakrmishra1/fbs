@@ -67,8 +67,24 @@ let handleRegistrationData = async function (req) {
 
 }
 
-function handleLongin(req) {
+async function handleLongin(req) {
+	try {
+		const data = { email, password } = req?.body || {};
+		let query = { 'email': email, 'password': password, deleted: false };
+		let existingUser = await findUser(query);
+		return existingUser ?
+			Promise.resolve({
+				"message": "sucessfully logged In",
+			}) :
+			Promise.reject({
+				message: "emailId or password doesn't exist in system"
+			})
 
+	} catch (error) {
+		return Promise.reject({
+			message: "Error while processing the request " + error,
+		});
+	}
 }
 
 
